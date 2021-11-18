@@ -1,10 +1,8 @@
-/* eslint-disable no-undef */
 /*
   TODO: Olá Galdino, alguma ideia melhor de onde colocar a informação desse
   arquivo?
   Ele não é bem um service, estaria mais para um setup. Mas não sei se é usual
   criar alguma pasta chamada setup ou algo desse gênero
-
 */
 const { NODE_ENV } = process.env
 
