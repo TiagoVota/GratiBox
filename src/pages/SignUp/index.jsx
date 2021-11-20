@@ -3,7 +3,7 @@ import { Link, useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 
 import theValidationProceeded from '../../validations/handleValidation'
-import validateSignUp from '../../validations/signUp'
+import validateSignUp from '../../validations/validate.signUp'
 import { errorModal, successModal } from '../../factories/modalFactory'
 import { postSignUp } from '../../services/service.auth'
 
@@ -32,10 +32,10 @@ const SignUp = () => {
 		postSignUp(body)
 			.then(() => {
 				successModal('Cadastro realizado!')
-				history.push('/login')
+
 				clearInputs()
-			})
-			.catch(({ request: { status }}) => handleFailRegister(status))
+				history.push('/login')
+			}).catch(({ request: { status }}) => handleFailRegister(status))
 	}
 
 	const clearInputs = () => {
@@ -49,7 +49,7 @@ const SignUp = () => {
 		const msgStatus = {
 			422: 'Campo(s) inválido(s)!',
 			409: 'E-mail já cadastrado!',
-			500: 'Erro nosso, tente novamente mais tarde por favor 🥺'
+			500: 'Erro nosso, tente novamente mais tarde, por favor 🥺'
 		}
 
 		const msgToSend = msgStatus[status] || 'Problema com nosso servidor 🥺'
@@ -162,6 +162,7 @@ const Input = styled.input`
 	padding-left: 13px;
 
 	::placeholder {
+		font-size: 22px;
 		color: #575757;
 	}
 
