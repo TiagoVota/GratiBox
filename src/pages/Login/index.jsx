@@ -26,10 +26,11 @@ const Login = () => {
 		if (!isValidInputs) return
 
 		postLogin(body)
-			.then(() => {
+			.then(({ data: { isSubscriber } }) => {
 				successModal('Login realizado!')
-				history.push('/subscription')
 				clearInputs()
+				if (isSubscriber) return redirect('/my-signature')
+				redirect('/subscription')
 			})
 			.catch(({ request: { status }}) => handleFailRegister(status))
 	}
@@ -38,6 +39,8 @@ const Login = () => {
 		setEmail('')
 		setPassword('')
 	}
+
+	const redirect = path => history.push(path)
 
 	const handleFailRegister = (status) => {
 		const msgStatus = {
