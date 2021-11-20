@@ -12,7 +12,12 @@ const GlobalStyle = createGlobalStyle`
   }
 	
 	button, input {
+		border-width: 0px;
 		font-family: 'Roboto', sans-serif;
+	}
+
+	a {
+		text-decoration: none;
 	}
 `
 
