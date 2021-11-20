@@ -21,7 +21,7 @@ const SignUp = () => {
 
 		const body = {
 			name,
-			email,
+			email: email?.toLowerCase(),
 			password,
 			repeatPassword,
 		}
@@ -47,8 +47,8 @@ const SignUp = () => {
 
 	const handleFailRegister = (status) => {
 		const msgStatus = {
-			400: 'Campo(s) inválido(s)!',
-			409: 'CPF e/ou e-mail já cadastrado(s)!',
+			422: 'Campo(s) inválido(s)!',
+			409: 'E-mail já cadastrado!',
 			500: 'Erro nosso, tente novamente mais tarde por favor 🥺'
 		}
 
