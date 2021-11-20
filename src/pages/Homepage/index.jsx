@@ -97,6 +97,5 @@ const Button = styled.button`
 	text-align: center;
 	color: #FFFFFF;
 	border-radius: 10px;
-	border-width: 0px;
 	background-color: ${props => props.isLogin ? '#4D65A8' : '#8C97EA'};
 `
