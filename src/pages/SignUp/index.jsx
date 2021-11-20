@@ -32,10 +32,10 @@ const SignUp = () => {
 		postSignUp(body)
 			.then(() => {
 				successModal('Cadastro realizado!')
-				history.push('/login')
+
 				clearInputs()
-			})
-			.catch(({ request: { status }}) => handleFailRegister(status))
+				history.push('/login')
+			}).catch(({ request: { status }}) => handleFailRegister(status))
 	}
 
 	const clearInputs = () => {
@@ -162,6 +162,7 @@ const Input = styled.input`
 	padding-left: 13px;
 
 	::placeholder {
+		font-size: 22px;
 		color: #575757;
 	}
 

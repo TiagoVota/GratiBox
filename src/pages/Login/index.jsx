@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 
+import UserContext from '../../contexts/UserContext'
 import theValidationProceeded from '../../validations/handleValidation'
 import validateLogin from '../../validations/validate.login'
 import { errorModal, successModal } from '../../factories/modalFactory'
@@ -9,9 +10,10 @@ import { postLogin } from '../../services/service.auth'
 
 
 const Login = () => {
+	const { setUserInfo } = useContext(UserContext)
+	const history = useHistory()
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
-	const history = useHistory()
 
 
 	const handleSubmit = (event) => {
@@ -26,13 +28,17 @@ const Login = () => {
 		if (!isValidInputs) return
 
 		postLogin(body)
-			.then(({ data: { isSubscriber } }) => {
+			.then(({ data: userInfo }) => {
 				successModal('Login realizado!')
 				clearInputs()
-				if (isSubscriber) return redirect('/my-signature')
+
+				setUserInfo(userInfo)
+				localStorage.setItem('userInfo', JSON.stringify(userInfo))
+
+				if (userInfo.isSubscriber) return redirect('/my-signature')
 				redirect('/subscription')
-			})
-			.catch(({ request: { status }}) => handleFailRegister(status))
+
+			}).catch(({ request: { status }}) => handleFailRegister(status))
 	}
 
 	const clearInputs = () => {
@@ -45,7 +51,7 @@ const Login = () => {
 	const handleFailRegister = (status) => {
 		const msgStatus = {
 			422: 'Campo(s) inválido(s)!',
-			409: 'E-mail e/ou senha incorretos(s)!',
+			401: 'E-mail e/ou senha incorretos(s)!',
 			500: 'Erro nosso, tente novamente mais tarde, por favor 🥺'
 		}
 
@@ -75,7 +81,7 @@ const Login = () => {
 				<Input
 					id='Senha'
 					placeholder='Ex: Senha!123'
-					type='text'
+					type='password'
 					onChange={({ target: { value }}) => setPassword(value)}
 					value={password}
 					required
@@ -139,6 +145,7 @@ const Input = styled.input`
 	padding-left: 13px;
 
 	::placeholder {
+		font-size: 22px;
 		color: #575757;
 	}
 
