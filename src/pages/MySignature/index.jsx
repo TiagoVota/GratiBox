@@ -13,8 +13,8 @@ import SignatureBox from './SignatureBox'
 const hardCodedPlanInfo = {
 	type: '@tipo_de_plano',
 	startDate: 'dd/mm/aaaa',
-	nextDeliveries: ['', '', ''].map(_ => 'dd/mm/aaaa'),
-	productsTypes: ['', '', ''].map((_, i) => `produto ${i+1}`),
+	nextDeliveries: [...'123'].map(_ => 'dd/mm/aaaa'),
+	productsTypes: [...'123'].map((e) => `produto ${e}`),
 }
 
 const MySignature = () => {
