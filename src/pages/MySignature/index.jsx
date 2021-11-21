@@ -1,19 +1,51 @@
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 
 import UserContext from '../../contexts/UserContext'
+import firstName from '../../utils/firstName'
+import { errorModal } from '../../factories/modalFactory'
+import { getPlanInfo } from '../../services/service.signature'
 
 import SignatureBox from './SignatureBox'
 
 
+const hardCodedPlanInfo = {
+	type: '@tipo_de_plano',
+	startDate: 'dd/mm/aaaa',
+	nextDeliveries: ['', '', ''].map(_ => 'dd/mm/aaaa'),
+	productsTypes: ['', '', ''].map((_, i) => `produto ${i+1}`),
+}
+
 const MySignature = () => {
-	const { userInfo: { name } } = useContext(UserContext)
+	const { userInfo: { name, token } } = useContext(UserContext)
+	const [planInfo, setPlanInfo] = useState(hardCodedPlanInfo)
 	const history = useHistory()
+
+	const requestPlan = () => {
+		if (token) {
+			getPlanInfo(token)
+				.then(({ data }) => setPlanInfo(data))
+				.catch(({ request: { status }}) => handleFailRequest(status))
+		}
+	}
+
+	const handleFailRequest = (status) => {
+		const msgStatus = {
+			404: 'Assinatura não encontrada!',
+			500: 'Erro nosso, tente novamente mais tarde, por favor 🥺'
+		}
+
+		const msgToSend = msgStatus[status] || 'Problema com o servidor 🥺'
+
+		errorModal(msgToSend)
+	}
 
 	const handleClick = () => history.push('/rating')
 
-	const displayName = name || '@User'
+	const displayName = firstName(name) || '@User'
+
+	useEffect(requestPlan, [token])
 
 	return (
 		<Container>
@@ -22,7 +54,7 @@ const MySignature = () => {
 				<h2>“Agradecer é arte de atrair coisas boas”</h2>
 			</TextWrapper>
 
-			<SignatureBox />
+			<SignatureBox planInfo={planInfo} />
 
 			<Button onClick={handleClick}>Avaliar entregas</Button>
 

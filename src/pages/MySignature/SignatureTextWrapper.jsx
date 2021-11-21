@@ -1,19 +1,13 @@
 import styled from 'styled-components'
 
 
-const datesList = [
-	'dd/mm/aaa',
-	'dd/mm/aaa',
-	'dd/mm/aaa',
-]
-
 const SignatureTextWrapper = ({ planInfo }) => {
 	const {
 		type,
 		startDate,
 		nextDeliveries,
 	} = planInfo
-	
+
 	return (
 		<Container>
 			<p>Plano: <span>{type}</span></p>
