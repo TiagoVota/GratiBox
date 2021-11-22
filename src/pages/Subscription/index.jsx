@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 
@@ -13,7 +13,6 @@ import PlanBox from './PlanBox'
 const Subscription = () => {
 	const { userInfo, setUserInfo } = useContext(UserContext)
 	const history = useHistory()
-	const [planType, setPlanType] = useState('')
 	const { name } = userInfo
 
 	const displayName = firstName(name) || '@User'
@@ -39,19 +38,16 @@ const Subscription = () => {
 
 	const redirect = path => history.push(path)
 	const handleClick = (type) => {
-		setPlanType(type)
-		console.log(planType)
-	}
-
-	useEffect(() => {
 		const newUserInfo = {
 			...userInfo,
-			planType
+			planType : type
 		}
-
+	
 		setUserInfo(newUserInfo)
 		localStorage.setItem('userInfo', JSON.stringify(newUserInfo))
-	}, [planType])
+
+		redirect('/sign-plan')
+	}
 
 	return (
 		<Container>

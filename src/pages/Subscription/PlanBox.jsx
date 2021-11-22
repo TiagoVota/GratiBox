@@ -17,8 +17,7 @@ const PlanBox = ({ planInfo, onClick: handleClick }) => {
 				{pList.map((pItem, idx) => <P key={idx}>{pItem}</P>)}
 			</TextWrapper>
 
-			<Button>
-				{/* <Button onClick={() => handleClick(type)}> */}
+			<Button onClick={() => handleClick(type)}>
 				Assinar
 			</Button>
 		</Container>
