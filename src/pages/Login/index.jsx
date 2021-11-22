@@ -55,7 +55,7 @@ const Login = () => {
 			500: 'Erro nosso, tente novamente mais tarde, por favor 🥺'
 		}
 
-		const msgToSend = msgStatus[status] || 'Problema com nosso servidor 🥺'
+		const msgToSend = msgStatus[status] || 'Problema com o servidor 🥺'
 
 		errorModal(msgToSend)
 	}
