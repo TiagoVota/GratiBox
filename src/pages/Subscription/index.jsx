@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 
@@ -46,7 +46,7 @@ const Subscription = () => {
 		setUserInfo(newUserInfo)
 		localStorage.setItem('userInfo', JSON.stringify(newUserInfo))
 
-		redirect('/sign-plan')
+		redirect('/sign-plan-1')
 	}
 
 	return (
