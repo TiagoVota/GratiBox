@@ -38,7 +38,8 @@ const Routes = () => {
 			<Route exact path="/login" component={Login} />
 			<Route exact path="/sign-up" component={SignUp} />
 			<Route exact path="/subscription" component={Subscription} />
-			<Route exact path="/sign-plan" component={SignPlan} />
+			<Route exact path="/sign-plan-1" component={SignPlan} />
+			<Route exact path="/sign-plan-2" component={SignPlan} />
 			<Route exact path="/my-signature" component={MySignature} />
 		</Switch>
 	)
