@@ -7,6 +7,7 @@ import Homepage from './pages/Homepage'
 import Login from './pages/Login'
 import SignUp from './pages/SignUp'
 import Subscription from './pages/Subscription'
+import SignPlan from './pages/SignPlan.jsx'
 import MySignature from './pages/MySignature'
 
 
@@ -37,6 +38,7 @@ const Routes = () => {
 			<Route exact path="/login" component={Login} />
 			<Route exact path="/sign-up" component={SignUp} />
 			<Route exact path="/subscription" component={Subscription} />
+			<Route exact path="/sign-plan" component={SignPlan} />
 			<Route exact path="/my-signature" component={MySignature} />
 		</Switch>
 	)
